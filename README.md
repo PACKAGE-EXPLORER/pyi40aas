@@ -1,5 +1,6 @@
-
 # PyI40AAS – Python Industry 4.0 Asset Administration Shell
+
+### This project is now known as basyx-python-sdk, available here: https://github.com/eclipse-basyx/basyx-python-sdk
 
 The PyI40AAS project aims to provide an implementation of the Asset Administration Shell (AAS) for Industry 4.0 Systems,
 compliant with the meta model and interface specification provided in
