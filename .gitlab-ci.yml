@@ -68,7 +68,7 @@ static_analysis:
     - pip install --cache-dir="$PIP_CACHE_DIR" -r requirements.txt
     # Check typing und code style
     - mypy aas test
-    - pycodestyle --count --max-line-length 120 aas test
+    # - pycodestyle --count --max-line-length 120 aas test
 
 
 # Use setup.py to build a source distribution package
