@@ -1,9 +1,37 @@
-- name: SonarCloud Scan
-  uses: SonarSource/sonarqube-scan-action@v5.0.0
-  env:
-    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  with:
-    args: >
-      -Dsonar.projectKey=PACKAGE-EXPLORER_pyi40aas
-      -Dsonar.organization=package-explorer
-      -Dsonar.sources=.
+name: SonarCloud Analysis
+
+on:
+  push:
+    branches:
+      - master  # Change to 'master' if that's your default branch
+
+jobs:
+  sonarcloud:
+    name: SonarCloud Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: |
+          if [ -f package.json ]; then
+            npm install || true
+          fi
+
+      - name: Run SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@v5.0.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=PACKAGE-EXPLORER_pyi40aas
+            -Dsonar.organization=package-explorer
+            -Dsonar.sources=.
+            -Dsonar.exclusions=**/*.md,**/*.txt,**/test/**,**/__tests__/**
